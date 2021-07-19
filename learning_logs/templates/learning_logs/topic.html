@@ -1,0 +1,36 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block header %}
+	<h2>{{ topic }}</h2>
+{% endblock header %}
+
+{% block content %}
+		<a href="/new_entry/{{ topic.id }}" name="submit" class="btn btn-primary">
+			Add new entry
+		</a>
+		<a href="delete_topic/"  name="submit" class="btn btn-primary">
+            Delete a topic
+        </a>
+ <br> <br>
+
+	{% for entry in entries %}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>
+					{{ entry.date_added|date:"M d, Y H:i" }}
+					<small>
+						<a href="/edit_entry/{{ entry.id }}">edit entry</a>
+					</small>
+				</h3>
+			</div>
+			<div class="panel-body">
+			{{ entry.text|linebreaks }}
+			</div>
+		</div> <!-- panel -->
+
+	{% empty%}
+		There are no entries for this yet.
+
+	{% endfor%}
+
+{% endblock content %}
